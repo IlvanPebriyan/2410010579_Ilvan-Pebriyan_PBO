@@ -15,20 +15,20 @@ public class ubahdata extends javax.swing.JFrame {
     }
 
     public void kirimDataLama(int id, String judul, String kategori, String platform, String tanggal, String status) {
-        this.idKonten = id; 
-        
-        txtjudul.setText(judul);
-        cbkategoriU.setSelectedItem(kategori);
-        cbplatform.setSelectedItem(platform);
-        cbstatus.setSelectedItem(status);
-        
-        try {
-            java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
-            jadwal.setDate(date);
-        } catch (Exception e) {
-            System.out.println("Gagal memuat tanggal: " + e.getMessage());
-        }
+    this.idKonten = id; 
+    
+    txtjudulU.setText(judul);
+    cbkategoriU.setSelectedItem(kategori);
+    cbplatformU.setSelectedItem(platform);
+    cbstatusU.setSelectedItem(status);
+    
+    try {
+        java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
+        jadwalU.setDate(date);
+    } catch (Exception e) {
+        System.out.println("Gagal memat tanggal: " + e.getMessage());
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,8 +180,8 @@ public class ubahdata extends javax.swing.JFrame {
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
        String judul = txtjudulU.getText().trim();
-    int idKategori = cbkategoriU.getSelectedIndex(); // Mengambil ID dari indeks JComboBox
-    int idPlatform = cbplatformU.getSelectedIndex(); // Mengambil ID dari indeks JComboBox
+    int idKategori = cbkategoriU.getSelectedIndex(); 
+    int idPlatform = cbplatformU.getSelectedIndex(); 
     String status = cbstatusU.getSelectedItem().toString();
     
     String tanggal = "";

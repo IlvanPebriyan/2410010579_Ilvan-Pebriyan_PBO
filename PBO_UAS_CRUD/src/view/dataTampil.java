@@ -15,7 +15,6 @@ public class dataTampil extends javax.swing.JFrame {
     public dataTampil() {
         initComponents();
         
-        // 1. Definisikan judul kolom tabel sesuai database Anda
         Object[] kolom = {"ID", "Judul Konten", "Kategori", "Platform", "Tanggal Tayang", "Status"};
         model = new DefaultTableModel(null, kolom);
         tblKonten.setModel(model);
@@ -193,34 +192,30 @@ public class dataTampil extends javax.swing.JFrame {
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         int barisTerpilih = tblKonten.getSelectedRow();
     
-    // 2. Validasi apakah user sudah memilih baris atau belum
-    if (barisTerpilih == -1) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Silahkan klik salah satu baris data pada tabel terlebih dahulu!");
-        return;
-    }
-    
-    // 3. Ambil teks/nilai dari masing-masing kolom pada baris yang dipilih
-    int id = Integer.parseInt(tblKonten.getValueAt(barisTerpilih, 0).toString());
-    String judul = tblKonten.getValueAt(barisTerpilih, 1).toString();
-    String kategori = tblKonten.getValueAt(barisTerpilih, 2).toString();
-    String platform = tblKonten.getValueAt(barisTerpilih, 3).toString();
-    String tanggal = tblKonten.getValueAt(barisTerpilih, 4).toString();
-    String status = tblKonten.getValueAt(barisTerpilih, 5).toString();
+    if (barisTerpilih != -1) {
+        int id = Integer.parseInt(tblKonten.getValueAt(barisTerpilih, 0).toString());
+        String judul = tblKonten.getValueAt(barisTerpilih, 1).toString();
+        String kategori = tblKonten.getValueAt(barisTerpilih, 2).toString();
+        String platform = tblKonten.getValueAt(barisTerpilih, 3).toString();
+        String tanggal = tblKonten.getValueAt(barisTerpilih, 4).toString();
+        String status = tblKonten.getValueAt(barisTerpilih, 5).toString();
 
-    // 4. Buka frame UbahDataForm
-    ubahdata formUbah = new ubahdata();
-    formUbah.setVisible(true);
-    
-    // 5. ALIRKAN DATA: Lempar semua variabel di atas ke method formUbah
-    formUbah.kirimDataLama(id, judul, kategori, platform, tanggal, status);
-    
-    // 6. AUTO REFRESH: Saat jendela UbahDataForm ditutup, tabel utama otomatis memuat data terbaru
-    formUbah.addWindowListener(new java.awt.event.WindowAdapter() {
-        @Override
-        public void windowClosed(java.awt.event.WindowEvent e) {
-            cc.tampilData(model); // Memanggil ulang query SELECT untuk memperbarui JTable
-        }
-    });
+        ubahdata formUbah = new ubahdata();
+        
+        formUbah.kirimDataLama(id, judul, kategori, platform, tanggal, status);
+        
+        formUbah.setVisible(true);
+        
+        formUbah.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                cc.tampilData(model); 
+            }
+        });
+        
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Silahkan pilih baris data pada tabel terlebih dahulu!");
+    }
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnTutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutupActionPerformed

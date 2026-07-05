@@ -7,11 +7,32 @@ package view;
 public class tambahData extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(tambahData.class.getName());
-
+    private int idKonten;
+    
     public tambahData() {
         initComponents();
     }
 
+    public void kirimDataLama(int id, String judul, String kategori, String platform, String tanggal, String status) {
+    this.idKonten = id; // Mengunci ID konten di variabel global
+    
+    // Set teks ke JTextField
+    txtjudul.setText(judul);
+    
+    // Set item ke JComboBox berdasarkan teks String dari tabel
+    cbkategori.setSelectedItem(kategori);
+    cbplatform.setSelectedItem(platform);
+    cbstatus.setSelectedItem(status);
+    
+    // Set tanggal ke JDateChooser
+    try {
+        java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
+        jadwal.setDate(date);
+    } catch (Exception e) {
+        System.out.println("Gagal memformat tanggal lama: " + e.getMessage());
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
