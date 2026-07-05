@@ -180,23 +180,23 @@ public class ubahdata extends javax.swing.JFrame {
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
        String judul = txtjudulU.getText().trim();
-    int idKategori = cbkategoriU.getSelectedIndex(); 
-    int idPlatform = cbplatformU.getSelectedIndex(); 
+    int Kategori = cbkategoriU.getSelectedIndex(); 
+    int Platform = cbplatformU.getSelectedIndex(); 
     String status = cbstatusU.getSelectedItem().toString();
     
     String tanggal = "";
-    if (jadwal.getDate() != null) {
+    if (jadwalU.getDate() != null) {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        tanggal = sdf.format(jadwal.getDate());
+        tanggal = sdf.format(jadwalU.getDate());
     }
 
-    if (judul.isEmpty() || idKategori == 0 || idPlatform == 0 || tanggal.isEmpty()) {
+    if (judul.isEmpty() || Kategori == 0 || Platform == 0 || tanggal.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this, "Semua data input harus dilengkapi!");
         return;
     }
 
     control.kontencontrol cc = new control.kontencontrol();
-    boolean berhasil = cc.ubahKonten(idKonten, judul, idKategori, idPlatform, tanggal, status);
+    boolean berhasil = cc.ubahKonten(idKonten, judul, Kategori, Platform, tanggal, status);
 
     if (berhasil) {
         javax.swing.JOptionPane.showMessageDialog(this, "Perubahan data berhasil disimpan ke database!");

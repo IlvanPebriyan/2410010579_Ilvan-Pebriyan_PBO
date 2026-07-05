@@ -14,17 +14,14 @@ public class tambahData extends javax.swing.JFrame {
     }
 
     public void kirimDataLama(int id, String judul, String kategori, String platform, String tanggal, String status) {
-    this.idKonten = id; // Mengunci ID konten di variabel global
+    this.idKonten = id; 
     
-    // Set teks ke JTextField
     txtjudul.setText(judul);
     
-    // Set item ke JComboBox berdasarkan teks String dari tabel
     cbkategori.setSelectedItem(kategori);
     cbplatform.setSelectedItem(platform);
     cbstatus.setSelectedItem(status);
     
-    // Set tanggal ke JDateChooser
     try {
         java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
         jadwal.setDate(date);
@@ -157,30 +154,28 @@ public class tambahData extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTutupActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        String judul = txtjudul.getText().trim();
+        String judul = txtjudul.getText().trim(); 
+        int idKategori = cbkategori.getSelectedIndex(); 
+        int idPlatform = cbplatform.getSelectedIndex();
+        String status = cbstatus.getSelectedItem().toString();
     
-    int idKategori = cbkategori.getSelectedIndex(); 
-    int idPlatform = cbplatform.getSelectedIndex();
-    
-    String status = cbstatus.getSelectedItem().toString();
-    
-    String tanggal = "";
-    if (jadwal.getDate() != null) {
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        tanggal = sdf.format(jadwal.getDate());
+        String tanggal = "";
+        if (jadwal.getDate() != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            tanggal = sdf.format(jadwal.getDate());
     }
 
-    if (judul.isEmpty() || idKategori == 0 || idPlatform == 0 || tanggal.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Mohon lengkapi semua data input terlebih dahulu!");
+        if (judul.isEmpty() || idKategori == 0 || idPlatform == 0 || tanggal.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Mohon lengkapi semua data input terlebih dahulu!");
         return;
     }
 
-    control.kontencontrol cc = new control.kontencontrol();
-    boolean berhasil = cc.tambahKonten(judul, idKategori, idPlatform, tanggal, status);
+        control.kontencontrol cc = new control.kontencontrol();
+        boolean berhasil = cc.tambahKonten(judul, idKategori, idPlatform, tanggal, status);
 
-    if (berhasil) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Data Konten Berhasil Ditambahkan ke Database!");
-        this.dispose(); 
+        if (berhasil) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Data Konten Berhasil Ditambahkan ke Database!");
+            this.dispose(); 
     } else {
         javax.swing.JOptionPane.showMessageDialog(this, "Gagal menambahkan data, periksa kembali koneksi basis data Anda.");
     }
