@@ -57,7 +57,15 @@ public class dataTampil extends javax.swing.JFrame {
             new String [] {
                 "Id", "Judul", "Kategori", "Platform", "Tanggal Tayang", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblKonten);
         tblKonten.getAccessibleContext().setAccessibleName("");
         tblKonten.getAccessibleContext().setAccessibleDescription("");
@@ -144,7 +152,15 @@ public class dataTampil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        new tambahData().setVisible(true);
+        tambahData formTambah = new tambahData();
+        formTambah.setVisible(true);
+    
+        formTambah.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                cc.tampilData(model); 
+            }
+    });
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
